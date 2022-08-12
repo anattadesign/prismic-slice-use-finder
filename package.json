@@ -16,9 +16,7 @@
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "@prismicio/client": "^6.0.0-beta.3",
-    "@prismicio/helpers": "^1.0.5",
-    "node-fetch": "^3.1.0"
+    "@prismicio/client": "^6.0.0-beta.3"
   },
   "devDependencies": {
     "@types/node": "18.7.2",
