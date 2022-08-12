@@ -1,29 +1,45 @@
-import { Box, Center, Heading, theme } from "@chakra-ui/react";
+import { Box, Button, Image, Text } from "@chakra-ui/react";
+import Link from "next/link";
 import * as React from "react";
 
 const HomeScreen = () => {
   return (
     <Box
       height={"100vh"}
-      backgroundImage="/coffee-hero.jpg"
+      backgroundImage="/coffee-small.jpg"
       backgroundSize="cover"
       backgroundRepeat={"no-repeat"}
-      color="white"
       display={"flex"}
       justifyContent={"center"}
       alignItems={"center"}
     >
-      <Box>
-        <Heading as="h1" size="4xl" noOfLines={1}>
-          Excited to see the slices!
-        </Heading>
-        <Heading as="h3" size="lg">
-          <Center>
-            <Heading as="h3" size="lg" color={theme.colors.blue["400"]}>
-              Click anywhere!
-            </Heading>
-          </Center>
-        </Heading>
+      <Box
+        backgroundColor={"white"}
+        p={8}
+        borderRadius={4}
+        display="flex"
+        shadow={1}
+      >
+        <Image
+          src="/mushroom.png"
+          alt="mushroom"
+          boxSize="100px"
+          objectFit="cover"
+        />
+        <Box pl={4}>
+          <Text fontSize="2xl">
+            Welcome to Four-sigmatic Prismic Dashboard.
+          </Text>
+          <Text textAlign={"right"}>
+            <Link href={`/slices`}>
+              <a>
+                <Button colorScheme="messenger" variant="link">
+                  Lets get Started!
+                </Button>
+              </a>
+            </Link>
+          </Text>
+        </Box>
       </Box>
     </Box>
   );
