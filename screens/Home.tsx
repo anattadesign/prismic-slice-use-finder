@@ -23,7 +23,7 @@ const HomeScreen = () => {
         <Image
           src="/mushroom.png"
           alt="mushroom"
-          boxSize="100px"
+          width="100px"
           objectFit="cover"
         />
         <Box pl={4}>
