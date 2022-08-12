@@ -9,9 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.2.6",
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "framer-motion": "^7.1.0",
     "next": "12.2.5",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "@prismicio/client": "^6.0.0-beta.3",
+    "@prismicio/helpers": "^1.0.5",
+    "node-fetch": "^3.1.0"
   },
   "devDependencies": {
     "@types/node": "18.7.2",
