@@ -1,4 +1,4 @@
-import { Box, Button, Heading } from "@chakra-ui/react";
+import { Box, Button, Text } from "@chakra-ui/react";
 import * as React from "react";
 
 import {
@@ -19,9 +19,9 @@ type ScreenProps = {
 
 const Header = () => {
   return (
-    <Heading as="h3" size="lg" p={8}>
+    <Text fontSize="4xl" p={8} pb={0}>
       All Prismic slices.
-    </Heading>
+    </Text>
   );
 };
 

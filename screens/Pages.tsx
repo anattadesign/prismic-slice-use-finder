@@ -1,4 +1,4 @@
-import { Box, Button, Heading, theme } from "@chakra-ui/react";
+import { Box, Button, Text } from "@chakra-ui/react";
 import * as React from "react";
 
 import {
@@ -32,13 +32,13 @@ const Header = () => {
   };
 
   return (
-    <Heading as="h3" size="lg" p={8}>
+    <Text fontSize="4xl" p={8} pb={0}>
       All Prismic pages which has{" "}
       <Box display={"inline-block"} textTransform={"capitalize"} color={"teal"}>
         {getSliceName()}
       </Box>{" "}
       slice.
-    </Heading>
+    </Text>
   );
 };
 
