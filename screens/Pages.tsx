@@ -34,11 +34,7 @@ const Header = () => {
   return (
     <Heading as="h3" size="lg" p={8}>
       All Prismic pages which has{" "}
-      <Box
-        display={"inline-block"}
-        textTransform={"capitalize"}
-        color={theme.colors.red["500"]}
-      >
+      <Box display={"inline-block"} textTransform={"capitalize"} color={"teal"}>
         {getSliceName()}
       </Box>{" "}
       slice.
@@ -80,7 +76,7 @@ const PagesScreen = ({ pages }: ScreenProps) => {
           </Button>
         </Box>
         <TableContainer>
-          <Table variant="simple">
+          <Table variant="striped" colorScheme="blackAlpha">
             <TableCaption>
               <>
                 All the pages which has <strong>{sid}</strong> in Prismic on

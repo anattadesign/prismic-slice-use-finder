@@ -3,6 +3,10 @@ import Link from "next/link";
 import * as React from "react";
 
 const HomeScreen = () => {
+  const [isLoading, onLoading] = React.useState(false);
+
+  const buttonText = "See all slices";
+
   return (
     <Box
       height={"100vh"}
@@ -20,21 +24,29 @@ const HomeScreen = () => {
         display="flex"
         shadow={1}
       >
-        <Image
-          src="/mushroom.png"
-          alt="mushroom"
-          width="100px"
-          objectFit="cover"
-        />
+        <Box w={"100px"}>
+          <Image
+            src="/mushroom.png"
+            alt="mushroom"
+            width="100px"
+            objectFit="cover"
+          />
+        </Box>
         <Box pl={4}>
-          <Text fontSize="2xl">
-            Welcome to Four-sigmatic Prismic Dashboard.
+          <Text fontSize="2xl" maxW={96}>
+            Welcome to Four-sigmatic Prismic Slices Dashboard.
           </Text>
           <Text textAlign={"right"}>
             <Link href={`/slices`}>
               <a>
-                <Button colorScheme="messenger" variant="link">
-                  Lets get Started!
+                <Button
+                  isLoading={isLoading}
+                  loadingText={buttonText}
+                  variant="solid"
+                  colorScheme="teal"
+                  onClick={() => onLoading(true)}
+                >
+                  {buttonText}
                 </Button>
               </a>
             </Link>

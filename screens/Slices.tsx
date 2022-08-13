@@ -31,7 +31,7 @@ const slicesScreen = ({ slices }: ScreenProps) => {
       <Header />
       <Box p={8}>
         <TableContainer>
-          <Table variant="simple">
+          <Table variant="striped" colorScheme="blackAlpha">
             <TableCaption>
               <>
                 All the slices present in the Prismic on &nbsp;
