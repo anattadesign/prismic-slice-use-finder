@@ -1,7 +1,7 @@
 import { NextApiResponse, NextApiRequest } from "next";
-import { RequestSlice, SlicePage } from "../../src/types";
-import { client } from "../../src/utils/client";
-import { getCurrentLocale } from "../../src/utils/currentLocale";
+import { RequestSlice, SlicePage } from "../../../src/types";
+import { client } from "../../../src/utils/client";
+import { getCurrentLocale } from "../../../src/utils/currentLocale";
 
 export default async function handler(
   _req: NextApiRequest,

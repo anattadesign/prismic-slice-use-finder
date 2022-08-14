@@ -1,7 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
-import { getAllPages } from "../../src/requests/getSlicePages";
 import PagesScreen from "../../src/screens/Pages";
 
 type Page = {
@@ -16,7 +15,9 @@ type PageProps = {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const sliceId = context?.params?.sid as string;
 
-  const pages: any = await getAllPages(sliceId);
+  const pages: any = await fetch(
+    `http://localhost:3000/api/slices/${sliceId}`
+  ).then((response) => response.json());
 
   return { props: { pages } };
 };
