@@ -3,6 +3,7 @@ import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import SlicesScreen from "../src/screens/Slices";
 import { Slices } from "../src/types";
+import { serverEndPoint } from "../src/utils/server";
 
 type PageProps = {
   data: Slices;
@@ -12,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const currentLocale = req.cookies.locale;
 
   const response: any = await fetch(
-    `http://localhost:3000/api/slices?lang=${currentLocale}`
+    `${serverEndPoint}/api/slices?lang=${currentLocale}`
   ).then((response) => response.json());
 
   return { props: { data: response } };

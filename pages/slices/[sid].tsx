@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import PagesScreen from "../../src/screens/Pages";
+import { serverEndPoint } from "../../src/utils/server";
 
 type Page = {
   url: string;
@@ -20,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const currentLocale = req.cookies.locale;
 
   const pages: any = await fetch(
-    `http://localhost:3000/api/slices/${sliceId}?lang=${currentLocale}`
+    `${serverEndPoint}/api/slices/${sliceId}?lang=${currentLocale}`
   ).then((response) => response.json());
 
   return { props: { pages } };

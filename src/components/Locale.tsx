@@ -2,6 +2,7 @@ import { Select } from "@chakra-ui/react";
 import * as React from "react";
 import { Locales } from "../types";
 import Cookies from "js-cookie";
+import { serverEndPoint } from "../utils/server";
 
 const defaultLocale = {
   id: "en-us",
@@ -18,9 +19,9 @@ const Locales = () => {
   const [selected, onSelect] = React.useState<string>(defaultLocale.id);
 
   const fetchLocales = async () => {
-    const locales: Locales = await fetch(
-      "http://localhost:3000/api/locale"
-    ).then((response) => response.json());
+    const locales: Locales = await fetch(`${serverEndPoint}/api/locale`).then(
+      (response) => response.json()
+    );
 
     if (locales && locales.length) {
       setLocales(locales);
