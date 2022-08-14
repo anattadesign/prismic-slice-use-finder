@@ -12,11 +12,15 @@ type PageProps = {
   pages: Page[];
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const sliceId = context?.params?.sid as string;
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  params,
+}) => {
+  const sliceId = params?.sid as string;
+  const currentLocale = req.cookies.locale;
 
   const pages: any = await fetch(
-    `http://localhost:3000/api/slices/${sliceId}`
+    `http://localhost:3000/api/slices/${sliceId}?lang=${currentLocale}`
   ).then((response) => response.json());
 
   return { props: { pages } };

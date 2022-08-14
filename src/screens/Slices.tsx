@@ -1,4 +1,4 @@
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import * as React from "react";
 
 import {
@@ -11,18 +11,22 @@ import {
   TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
-import Link from "next/link";
 import Header from "../components/Header";
 import { Slices } from "../types";
 import { getCurrentLocale } from "../utils/currentLocale";
+import { useRouter } from "next/router";
 
 type ScreenProps = {
   slices: Slices;
 };
 
-const locale = getCurrentLocale();
+const SlicesScreen = ({ slices }: ScreenProps) => {
+  const router = useRouter();
 
-const slicesScreen = ({ slices }: ScreenProps) => {
+  const handleClick = (sliceName: string) => {
+    router.push(`/slices/${sliceName}?lang=${getCurrentLocale()}`);
+  };
+
   return (
     <>
       <Header title="All Prismic slices" />
@@ -47,15 +51,15 @@ const slicesScreen = ({ slices }: ScreenProps) => {
               {slices.map((slice) => (
                 <Tr key={slice.id}>
                   <Td>
-                    <Link href={`/slices/${slice.name}?lang=${locale}`}>
-                      <a>
-                        <Button colorScheme="messenger" variant="link">
-                          <Box textTransform={"capitalize"}>
-                            {slice.name.replaceAll("_", " ")}
-                          </Box>
-                        </Button>
-                      </a>
-                    </Link>
+                    <Button
+                      colorScheme="messenger"
+                      variant="link"
+                      onClick={() => handleClick(slice.name)}
+                    >
+                      <Box textTransform={"capitalize"}>
+                        {slice.name.replaceAll("_", " ")}
+                      </Box>
+                    </Button>
                   </Td>
                 </Tr>
               ))}
@@ -67,4 +71,4 @@ const slicesScreen = ({ slices }: ScreenProps) => {
   );
 };
 
-export default slicesScreen;
+export default SlicesScreen;

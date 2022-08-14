@@ -8,10 +8,12 @@ type PageProps = {
   data: Slices;
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const response: any = await fetch("http://localhost:3000/api/slices").then(
-    (response) => response.json()
-  );
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const currentLocale = req.cookies.locale;
+
+  const response: any = await fetch(
+    `http://localhost:3000/api/slices?lang=${currentLocale}`
+  ).then((response) => response.json());
 
   return { props: { data: response } };
 };

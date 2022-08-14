@@ -8,7 +8,8 @@ const defaultLocale = {
   name: "English - United States",
 };
 
-const setLocaleCookie = (locale: string) => Cookies.set("locale", locale);
+const setLocaleCookie = (locale: string) =>
+  Cookies.set("locale", locale, { expires: 1 });
 
 const getLocaleCookie = () => Cookies.get("locale");
 

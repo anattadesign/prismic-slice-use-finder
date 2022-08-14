@@ -1,15 +1,21 @@
 import { Box, Button, Image, Text } from "@chakra-ui/react";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import * as React from "react";
 import Locales from "../components/Locale";
 import { getCurrentLocale } from "../utils/currentLocale";
 
-const locale = getCurrentLocale();
-
 const HomeScreen = () => {
   const [isLoading, onLoading] = React.useState(false);
 
+  const router = useRouter();
+
   const buttonText = "See all slices";
+
+  const handleClick = () => {
+    onLoading(true);
+
+    router.push(`/slices?lang=${getCurrentLocale()}`);
+  };
 
   return (
     <Box
@@ -43,19 +49,15 @@ const HomeScreen = () => {
               <Locales />
             </Box>
             <Text textAlign={"right"}>
-              <Link href={`/slices?lang=${locale}`}>
-                <a>
-                  <Button
-                    isLoading={isLoading}
-                    loadingText={buttonText}
-                    variant="solid"
-                    colorScheme="teal"
-                    onClick={() => onLoading(true)}
-                  >
-                    {buttonText}
-                  </Button>
-                </a>
-              </Link>
+              <Button
+                isLoading={isLoading}
+                loadingText={buttonText}
+                variant="solid"
+                colorScheme="teal"
+                onClick={handleClick}
+              >
+                {buttonText}
+              </Button>
             </Text>
           </Box>
         </Box>
