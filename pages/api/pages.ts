@@ -1,6 +1,7 @@
 import { NextApiResponse, NextApiRequest } from "next";
 import { RequestSlice, SlicePage } from "../../src/types";
 import { client } from "../../src/utils/client";
+import { getCurrentLocale } from "../../src/utils/currentLocale";
 
 export default async function handler(
   _req: NextApiRequest,
@@ -8,8 +9,9 @@ export default async function handler(
 ) {
   try {
     const { sid: sliceQuery } = _req.query;
+    const locale = getCurrentLocale();
 
-    const response = await client.dangerouslyGetAll();
+    const response = await client.dangerouslyGetAll({ lang: locale });
 
     /**
      * Response will be a list of all the published documents.

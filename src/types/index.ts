@@ -3,7 +3,7 @@ export type Locale = {
   name: string;
 };
 
-export type Locales = Locales[];
+export type Locales = Locale[];
 
 export type Slice = {
   name: string;

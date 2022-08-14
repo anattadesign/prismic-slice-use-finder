@@ -1,6 +1,7 @@
 import { Box, Button, Image, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import * as React from "react";
+import Locales from "../components/Locale";
 
 const HomeScreen = () => {
   const [isLoading, onLoading] = React.useState(false);
@@ -33,24 +34,27 @@ const HomeScreen = () => {
           />
         </Box>
         <Box pl={4}>
-          <Text fontSize="2xl" maxW={96}>
-            Welcome to Four-sigmatic Prismic Slices Dashboard.
-          </Text>
-          <Text textAlign={"right"}>
-            <Link href={`/slices`}>
-              <a>
-                <Button
-                  isLoading={isLoading}
-                  loadingText={buttonText}
-                  variant="solid"
-                  colorScheme="teal"
-                  onClick={() => onLoading(true)}
-                >
-                  {buttonText}
-                </Button>
-              </a>
-            </Link>
-          </Text>
+          <Text fontSize="2xl">Four-sigmatic Prismic Slices Dashboard.</Text>
+          <Box display={"flex"} justifyContent={"space-between"} mt={8}>
+            <Box mr={8}>
+              <Locales />
+            </Box>
+            <Text textAlign={"right"}>
+              <Link href={`/slices`}>
+                <a>
+                  <Button
+                    isLoading={isLoading}
+                    loadingText={buttonText}
+                    variant="solid"
+                    colorScheme="teal"
+                    onClick={() => onLoading(true)}
+                  >
+                    {buttonText}
+                  </Button>
+                </a>
+              </Link>
+            </Text>
+          </Box>
         </Box>
       </Box>
     </Box>

@@ -22,27 +22,6 @@ type ScreenProps = {
   pages: Page[];
 };
 
-const Header_ = () => {
-  const router = useRouter();
-  const { sid } = router.query;
-
-  const getSliceName = () => {
-    if (sid && typeof sid === "string") {
-      return sid.replaceAll("_", " ");
-    }
-  };
-
-  return (
-    <Text fontSize="4xl" p={8} pb={0}>
-      All Prismic pages which has{" "}
-      <Box display={"inline-block"} textTransform={"capitalize"} color={"teal"}>
-        {getSliceName()}
-      </Box>{" "}
-      slice.
-    </Text>
-  );
-};
-
 const getName = (page: Page) => {
   try {
     const [content] = page.title;

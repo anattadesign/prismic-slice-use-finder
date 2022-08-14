@@ -2,9 +2,8 @@ import { Box } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import HomePage from "../src/screens/Home";
-import { HomeScreenProps } from "../src/types";
 
-const Home: NextPage<HomeScreenProps> = () => {
+const Home: NextPage = () => {
   return (
     <Box>
       <Head>
