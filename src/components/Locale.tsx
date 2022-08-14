@@ -15,7 +15,7 @@ const setLocaleCookie = (locale: string) =>
 const getLocaleCookie = () => Cookies.get("locale");
 
 const Locales = () => {
-  const [locales, setLocales] = React.useState<Locales>([]);
+  const [locales, setLocales] = React.useState<Locales>([defaultLocale]);
   const [selected, onSelect] = React.useState<string>(defaultLocale.id);
 
   const fetchLocales = async () => {
@@ -25,8 +25,6 @@ const Locales = () => {
 
     if (locales && locales.length) {
       setLocales(locales);
-    } else {
-      setLocales([defaultLocale]);
     }
   };
 
