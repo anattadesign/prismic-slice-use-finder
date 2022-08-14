@@ -1,6 +1,16 @@
-import { Box, Button, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  CircularProgress,
+  Typography,
+} from "@mui/material";
+import { grey } from "@mui/material/colors";
 import { useRouter } from "next/router";
 import * as React from "react";
+import Header from "../components/Header";
 import Locales from "../components/Locale";
 import { getCurrentLocale } from "../utils/currentLocale";
 
@@ -9,8 +19,6 @@ const HomeScreen = () => {
 
   const router = useRouter();
 
-  const buttonText = "See all slices";
-
   const handleClick = () => {
     onLoading(true);
 
@@ -18,49 +26,51 @@ const HomeScreen = () => {
   };
 
   return (
-    <Box
-      height={"100vh"}
-      backgroundImage="/coffee-small.jpg"
-      backgroundSize="cover"
-      backgroundRepeat={"no-repeat"}
-      display={"flex"}
-      justifyContent={"center"}
-      alignItems={"center"}
-    >
-      <Box
-        backgroundColor={"white"}
-        p={8}
-        borderRadius={4}
-        display="flex"
-        shadow={1}
-      >
-        <Box w={"100px"}>
-          <Image
-            src="/mushroom.png"
-            alt="mushroom"
-            width="100px"
-            objectFit="cover"
-          />
-        </Box>
-        <Box pl={4}>
-          <Text fontSize="2xl">Four-sigmatic Prismic Slices Dashboard.</Text>
-          <Box display={"flex"} justifyContent={"space-between"} mt={8}>
-            <Box mr={8}>
-              <Locales />
-            </Box>
-            <Text textAlign={"right"}>
-              <Button
-                isLoading={isLoading}
-                loadingText={buttonText}
-                variant="solid"
-                colorScheme="teal"
-                onClick={handleClick}
+    <Box bgcolor={grey["A100"]} minHeight="100vh">
+      <Header title="Four-Sigmatic Prismic Slices Dashboard" />
+      <Box maxWidth={750} margin="auto" mt={16}>
+        <Card sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            <CardContent>
+              <Typography component="div" variant="h5">
+                Lets make it happen with a single click.
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                color="text.secondary"
+                component="div"
               >
-                {buttonText}
-              </Button>
-            </Text>
+                Created by Anatta team!
+              </Typography>
+            </CardContent>
+            <CardContent>
+              <Box sx={{ alignItems: "center", display: "flex" }}>
+                <Locales />
+                <Button
+                  variant="contained"
+                  onClick={handleClick}
+                  startIcon={isLoading && <CircularProgress size={20} />}
+                  sx={{ ml: 4 }}
+                  size="large"
+                >
+                  See all slices
+                </Button>
+              </Box>
+            </CardContent>
           </Box>
-        </Box>
+          <CardMedia
+            component="img"
+            sx={{ width: 200 }}
+            image="/coffee-thumbnail.jpg"
+            alt="Coffee"
+          />
+        </Card>
       </Box>
     </Box>
   );

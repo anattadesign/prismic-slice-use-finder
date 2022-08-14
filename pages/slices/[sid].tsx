@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box } from "@mui/material";
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import PagesScreen from "../../src/screens/Pages";

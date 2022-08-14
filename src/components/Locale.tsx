@@ -1,4 +1,10 @@
-import { Select } from "@chakra-ui/react";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import * as React from "react";
 import { Locales } from "../types";
 import Cookies from "js-cookie";
@@ -46,20 +52,28 @@ const Locales = () => {
     lookupForLocaleCookie();
   }, []);
 
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (event: SelectChangeEvent) => {
     const changedLocale = event.target.value;
     onSelect(changedLocale);
     setLocaleCookie(changedLocale);
   };
 
   return (
-    <Select value={selected} onChange={handleChange} borderColor="teal">
-      {locales.map((locale) => (
-        <option value={locale.id} key={locale.id}>
-          {locale.name}
-        </option>
-      ))}
-    </Select>
+    <FormControl sx={{ minWidth: 120 }}>
+      <InputLabel id="locale">Locale</InputLabel>
+      <Select
+        value={selected}
+        onChange={handleChange}
+        labelId="locale"
+        label="Locale"
+      >
+        {locales.map((locale) => (
+          <MenuItem value={locale.id} key={locale.id}>
+            {locale.name}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 };
 
