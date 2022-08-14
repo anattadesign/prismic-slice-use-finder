@@ -14,10 +14,13 @@ import {
 import Link from "next/link";
 import Header from "../components/Header";
 import { Slices } from "../types";
+import { getCurrentLocale } from "../utils/currentLocale";
 
 type ScreenProps = {
   slices: Slices;
 };
+
+const locale = getCurrentLocale();
 
 const slicesScreen = ({ slices }: ScreenProps) => {
   return (
@@ -44,7 +47,7 @@ const slicesScreen = ({ slices }: ScreenProps) => {
               {slices.map((slice) => (
                 <Tr key={slice.id}>
                   <Td>
-                    <Link href={`/slices/${slice.name}`}>
+                    <Link href={`/slices/${slice.name}?lang=${locale}`}>
                       <a>
                         <Button colorScheme="messenger" variant="link">
                           <Box textTransform={"capitalize"}>

@@ -2,6 +2,9 @@ import { Box, Button, Image, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import * as React from "react";
 import Locales from "../components/Locale";
+import { getCurrentLocale } from "../utils/currentLocale";
+
+const locale = getCurrentLocale();
 
 const HomeScreen = () => {
   const [isLoading, onLoading] = React.useState(false);
@@ -40,7 +43,7 @@ const HomeScreen = () => {
               <Locales />
             </Box>
             <Text textAlign={"right"}>
-              <Link href={`/slices`}>
+              <Link href={`/slices?lang=${locale}`}>
                 <a>
                   <Button
                     isLoading={isLoading}
