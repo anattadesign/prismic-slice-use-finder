@@ -13,9 +13,10 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import Header from "../components/Header";
+import { Slices } from "../types";
 
 type ScreenProps = {
-  slices: string[];
+  slices: Slices;
 };
 
 const slicesScreen = ({ slices }: ScreenProps) => {
@@ -40,13 +41,15 @@ const slicesScreen = ({ slices }: ScreenProps) => {
               </Tr>
             </Thead>
             <Tbody>
-              {slices.map((slice: string) => (
-                <Tr key={slice}>
+              {slices.map((slice) => (
+                <Tr key={slice.id}>
                   <Td>
-                    <Link href={`/slices/${slice}`}>
+                    <Link href={`/slices/${slice.name}`}>
                       <a>
                         <Button colorScheme="messenger" variant="link">
-                          {slice}
+                          <Box textTransform={"capitalize"}>
+                            {slice.name.replaceAll("_", " ")}
+                          </Box>
                         </Button>
                       </a>
                     </Link>

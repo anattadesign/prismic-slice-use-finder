@@ -1,19 +1,19 @@
 import { Box } from "@chakra-ui/react";
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
-import { getAllSlices } from "../src/requests/getAllSlices";
 import SlicesScreen from "../src/screens/Slices";
-
-type Slice = string;
+import { Slices } from "../src/types";
 
 type PageProps = {
-  data: Slice[];
+  data: Slices;
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const slices: any = await getAllSlices();
+  const response: any = await fetch("http://localhost:3000/api/slices").then(
+    (response) => response.json()
+  );
 
-  return { props: { data: slices } };
+  return { props: { data: response } };
 };
 
 const Home: NextPage<PageProps> = ({ data }) => {

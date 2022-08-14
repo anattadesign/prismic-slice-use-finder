@@ -2,31 +2,10 @@ import { Box, Button, Image, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import * as React from "react";
 
-type Locales = {
-  id: string;
-  name: string;
-};
-
-type HomeScreenProps = {
-  locales: Locales[];
-};
-
-const HomeScreen = ({ locales }: HomeScreenProps) => {
+const HomeScreen = () => {
   const [isLoading, onLoading] = React.useState(false);
 
   const buttonText = "See all slices";
-
-  React.useEffect(() => {
-    /**
-     * Set the locales.
-     */
-
-    const hasNotLocalesSet = !localStorage.getItem("locales");
-
-    if (hasNotLocalesSet) {
-      localStorage.setItem("locales", JSON.stringify(locales));
-    }
-  }, [locales]);
 
   return (
     <Box

@@ -1,17 +1,10 @@
 import { Box } from "@chakra-ui/react";
-import type { GetServerSideProps, NextPage } from "next";
+import type { NextPage } from "next";
 import Head from "next/head";
-import { getAllLocales } from "../src/requests/getAllLocales";
 import HomePage from "../src/screens/Home";
 import { HomeScreenProps } from "../src/types";
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const locales: any = await getAllLocales();
-
-  return { props: { locales } };
-};
-
-const Home: NextPage<HomeScreenProps> = ({ locales }) => {
+const Home: NextPage<HomeScreenProps> = () => {
   return (
     <Box>
       <Head>
@@ -21,7 +14,7 @@ const Home: NextPage<HomeScreenProps> = ({ locales }) => {
       </Head>
 
       <main>
-        <HomePage locales={locales} />
+        <HomePage />
       </main>
     </Box>
   );
