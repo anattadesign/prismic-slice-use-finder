@@ -12,6 +12,7 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import Header from "../components/Header";
 type Page = {
   url: string;
   title: any;
@@ -21,7 +22,7 @@ type ScreenProps = {
   pages: Page[];
 };
 
-const Header = () => {
+const Header_ = () => {
   const router = useRouter();
   const { sid } = router.query;
 
@@ -66,9 +67,33 @@ const PagesScreen = ({ pages }: ScreenProps) => {
     }
   };
 
+  const getSliceName = () => {
+    if (sid && typeof sid === "string") {
+      return sid.replaceAll("_", " ");
+    }
+  };
+
+  const getHeader = () => {
+    const headerTitle = (
+      <>
+        All Prismic pages which has{" "}
+        <Box
+          display={"inline-block"}
+          textTransform={"capitalize"}
+          color={"teal"}
+        >
+          {getSliceName()}
+        </Box>{" "}
+        slice.
+      </>
+    );
+
+    return <Header title={headerTitle} />;
+  };
+
   return (
     <>
-      <Header />
+      {getHeader()}
       <Box p={8}>
         <Box textAlign={"right"}>
           <Button colorScheme="messenger" variant="link">
@@ -79,8 +104,8 @@ const PagesScreen = ({ pages }: ScreenProps) => {
           <Table variant="striped" colorScheme="blackAlpha">
             <TableCaption>
               <>
-                All the pages which has <strong>{sid}</strong> in Prismic on
-                &nbsp;
+                All the pages which has <strong>{getSliceName()}</strong> in
+                Prismic on &nbsp;
                 {new Date().toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",

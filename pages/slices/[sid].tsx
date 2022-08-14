@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
-import { getAllPages } from "../../requests/getSlicePages";
-import PagesScreen from "../../screens/Pages";
+import { getAllPages } from "../../src/requests/getSlicePages";
+import PagesScreen from "../../src/screens/Pages";
 
 type Page = {
   url: string;

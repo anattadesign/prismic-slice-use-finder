@@ -12,23 +12,16 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import Header from "../components/Header";
 
 type ScreenProps = {
   slices: string[];
 };
 
-const Header = () => {
-  return (
-    <Text fontSize="4xl" p={8} pb={0}>
-      All Prismic slices.
-    </Text>
-  );
-};
-
 const slicesScreen = ({ slices }: ScreenProps) => {
   return (
     <>
-      <Header />
+      <Header title="All Prismic slices" />
       <Box p={8}>
         <TableContainer>
           <Table variant="striped" colorScheme="blackAlpha">
