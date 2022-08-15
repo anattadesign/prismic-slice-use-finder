@@ -62,7 +62,9 @@ const HomeScreen = () => {
                   variant="contained"
                   onClick={handleClick}
                   startIcon={
-                    isLoading && <CircularProgress size={20} color="info" />
+                    isLoading && (
+                      <CircularProgress size={20} sx={{ color: "white" }} />
+                    )
                   }
                   sx={{ ml: 4 }}
                   size="large"

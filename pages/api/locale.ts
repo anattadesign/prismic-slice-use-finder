@@ -7,7 +7,7 @@ export default async function handler(
   res: NextApiResponse<Locales>
 ) {
   try {
-    const response: any = await client.getRepository();
+    const response = await client.getRepository();
 
     const locales = response.languages;
 

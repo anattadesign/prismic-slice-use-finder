@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const sliceId = params?.sid as string;
   const currentLocale = req.cookies.locale;
 
-  const pages: any = await fetch(
+  const pages = await fetch(
     `${serverEndPoint}/api/slices/${sliceId}?lang=${currentLocale}`
   ).then((response) => response.json());
 

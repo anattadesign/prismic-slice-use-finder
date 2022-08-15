@@ -12,7 +12,7 @@ type PageProps = {
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const currentLocale = req.cookies.locale;
 
-  const response: any = await fetch(
+  const response = await fetch(
     `${serverEndPoint}/api/slices?lang=${currentLocale}`
   ).then((response) => response.json());
 
