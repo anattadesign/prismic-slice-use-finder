@@ -7,6 +7,7 @@ import { serverEndPoint } from "../../src/utils/server";
 type Page = {
   url: string;
   title: any;
+  occurrences: number;
 };
 
 type PageProps = {
