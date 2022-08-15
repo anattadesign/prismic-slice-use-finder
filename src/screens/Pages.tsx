@@ -78,16 +78,6 @@ const PagesScreen = ({ pages }: ScreenProps) => {
         return 1;
       },
     },
-    {
-      field: "actions",
-      headerName: "Actions",
-      width: 300,
-      align: "right",
-      headerAlign: "right",
-      renderCell: ({ row }: GridRenderCellParams) => {
-        return <>Actions WIP</>;
-      },
-    },
   ];
 
   const getHeader = () => {
@@ -138,8 +128,7 @@ const PagesScreen = ({ pages }: ScreenProps) => {
             align="center"
             display={"block"}
           >
-            All the pages which has <strong>{getSliceName()}</strong> in Prismic
-            on &nbsp;
+            All we have <strong>{getSliceName()}</strong> in Prismic on &nbsp;
             {new Date().toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
