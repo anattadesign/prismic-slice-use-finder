@@ -1,21 +1,19 @@
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Button, Typography } from "@mui/material";
 import * as React from "react";
 
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  TableContainer,
-} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import Header from "../components/Header";
+import Link from "next/link";
+import {
+  DataGrid,
+  GridColDef,
+  GridRenderCellParams,
+  GridToolbar,
+} from "@mui/x-data-grid";
 type Page = {
   url: string;
   title: any;
+  occurrences: number;
 };
 
 type ScreenProps = {
@@ -35,16 +33,17 @@ const PagesScreen = ({ pages }: ScreenProps) => {
   const router = useRouter();
   const { sid } = router.query;
 
-  const getDefaultContent = () => {
-    const hasNoPage = pages && !pages.length;
-    if (hasNoPage) {
-      return (
-        <Tr>
-          <Td>This slice has not been added to any page yet!</Td>
-        </Tr>
-      );
-    }
-  };
+  const CustomNoRowsOverlay = () => (
+    <Typography
+      component={"div"}
+      variant="h6"
+      display={"block"}
+      align={"center"}
+      pt={8}
+    >
+      This slice has not been added to any page yet!
+    </Typography>
+  );
 
   const getSliceName = () => {
     if (sid && typeof sid === "string") {
@@ -52,14 +51,54 @@ const PagesScreen = ({ pages }: ScreenProps) => {
     }
   };
 
+  const columns: GridColDef[] = [
+    {
+      field: "title",
+      headerName: "Page name",
+      width: 700,
+      renderCell: ({ row }: GridRenderCellParams) => {
+        return (
+          <Button>
+            <a href={row.url} target={"_blank"} rel="noreferrer">
+              {getName(row)}
+            </a>
+          </Button>
+        );
+      },
+    },
+    {
+      field: "occurrences",
+      width: 200,
+      headerName: "Occurrences",
+      align: "center",
+      headerAlign: "center",
+      renderCell: ({ row }: GridRenderCellParams) => {
+        if (row.occurrences) return row.occurrences;
+
+        return 1;
+      },
+    },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 300,
+      align: "right",
+      headerAlign: "right",
+      renderCell: ({ row }: GridRenderCellParams) => {
+        return <>Actions WIP</>;
+      },
+    },
+  ];
+
   const getHeader = () => {
     const headerTitle = (
       <>
         All Prismic pages which has{" "}
         <Box
-          display={"inline-block"}
-          textTransform={"capitalize"}
-          color={"teal"}
+          sx={{
+            display: "inline-block",
+            textTransform: "uppercase",
+          }}
         >
           {getSliceName()}
         </Box>{" "}
@@ -73,45 +112,40 @@ const PagesScreen = ({ pages }: ScreenProps) => {
   return (
     <>
       {getHeader()}
-      <Box p={8}>
-        <Box textAlign={"right"}>
-          <Button colorScheme="messenger" variant="link">
-            <a href={"/slices"}>Back to slices</a>
-          </Button>
+      <Box p={8} pt={2}>
+        <Box textAlign={"right"} mb={2}>
+          <Link href={"/"}>Home</Link>
+          <Box display={"inline-block"} width={16} />
+          <Link href={"/slices"}>Back to slices</Link>
+          <Box display={"inline-block"} width={16} />
+          <Link href={"/"}>Change locale</Link>
         </Box>
-        <TableContainer>
-          <Table variant="striped" colorScheme="blackAlpha">
-            <TableCaption>
-              <>
-                All the pages which has <strong>{getSliceName()}</strong> in
-                Prismic on &nbsp;
-                {new Date().toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                })}
-              </>
-            </TableCaption>
-            <Thead>
-              <Tr>
-                <Th>Page name</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {pages.map((page: Page) => (
-                <Tr key={page.url}>
-                  <Td>
-                    <Button colorScheme="messenger" variant="link">
-                      <a href={page.url} target="_blank" rel="noreferrer">
-                        {getName(page)}
-                      </a>
-                    </Button>
-                  </Td>
-                </Tr>
-              ))}
-              {getDefaultContent()}
-            </Tbody>
-          </Table>
-        </TableContainer>
+        <Box height="70vh">
+          <DataGrid
+            rows={pages}
+            columns={columns}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
+            checkboxSelection
+            components={{
+              Toolbar: GridToolbar,
+              NoRowsOverlay: CustomNoRowsOverlay,
+            }}
+          />
+          <Typography
+            variant="overline"
+            pt={2}
+            align="center"
+            display={"block"}
+          >
+            All the pages which has <strong>{getSliceName()}</strong> in Prismic
+            on &nbsp;
+            {new Date().toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+            })}
+          </Typography>
+        </Box>
       </Box>
     </>
   );

@@ -1,3 +1,4 @@
+import * as React from "react";
 import {
   Box,
   Button,
@@ -9,7 +10,6 @@ import {
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { useRouter } from "next/router";
-import * as React from "react";
 import Header from "../components/Header";
 import Locales from "../components/Locale";
 import { getCurrentLocale } from "../utils/currentLocale";
@@ -29,7 +29,13 @@ const HomeScreen = () => {
     <Box bgcolor={grey["A100"]} minHeight="100vh">
       <Header title="Four-Sigmatic Prismic Slices Dashboard" />
       <Box maxWidth={750} margin="auto" mt={16}>
-        <Card sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Card
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            height: "16rem",
+          }}
+        >
           <Box
             sx={{
               display: "flex",
@@ -46,7 +52,7 @@ const HomeScreen = () => {
                 color="text.secondary"
                 component="div"
               >
-                Created by Anatta team!
+                Choose form the available locales.
               </Typography>
             </CardContent>
             <CardContent>
@@ -55,7 +61,9 @@ const HomeScreen = () => {
                 <Button
                   variant="contained"
                   onClick={handleClick}
-                  startIcon={isLoading && <CircularProgress size={20} />}
+                  startIcon={
+                    isLoading && <CircularProgress size={20} color="info" />
+                  }
                   sx={{ ml: 4 }}
                   size="large"
                 >
