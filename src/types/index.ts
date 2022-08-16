@@ -16,7 +16,7 @@ export type SlicePage = {
   url: string;
   title: any;
   id: string;
-  occurrences?: number;
+  occurrences: number;
 };
 
 export type RequestSlice = Slice & { slice_type: string };

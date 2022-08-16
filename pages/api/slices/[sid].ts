@@ -49,7 +49,7 @@ export default async function handler(
               if (page.id === id) {
                 return {
                   ...page,
-                  occurrences: page.occurrences ? page.occurrences + 1 : 1,
+                  occurrences: page.occurrences + 1,
                 };
               }
 
@@ -61,6 +61,7 @@ export default async function handler(
             slicePages.push({
               url,
               title: data.title,
+              occurrences: 1,
               id,
             });
           }
