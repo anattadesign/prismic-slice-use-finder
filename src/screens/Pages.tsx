@@ -10,14 +10,15 @@ import {
   GridRenderCellParams,
   GridToolbar,
 } from "@mui/x-data-grid";
+import { serverEndPoint } from "../utils/server";
+import { getCurrentLocale } from "../utils/currentLocale";
+import fetcher from "../utils/fetch";
+import useSWRImmutable from "swr/immutable";
+
 type Page = {
   url: string;
   title: any;
   occurrences: number;
-};
-
-type ScreenProps = {
-  pages: Page[];
 };
 
 const getName = (page: Page) => {
@@ -29,9 +30,12 @@ const getName = (page: Page) => {
   }
 };
 
-const PagesScreen = ({ pages }: ScreenProps) => {
+const PagesScreen = () => {
   const router = useRouter();
-  const { sid } = router.query;
+  const { sid: sliceId } = router.query;
+  const pagesEndPoint = `${serverEndPoint}/api/slices/${sliceId}?lang=${getCurrentLocale()}`;
+
+  const { data } = useSWRImmutable<Page[]>(pagesEndPoint, fetcher);
 
   const CustomNoRowsOverlay = () => (
     <Typography
@@ -46,8 +50,8 @@ const PagesScreen = ({ pages }: ScreenProps) => {
   );
 
   const getSliceName = () => {
-    if (sid && typeof sid === "string") {
-      return sid.replaceAll("_", " ");
+    if (sliceId && typeof sliceId === "string") {
+      return sliceId.replaceAll("_", " ");
     }
   };
 
@@ -112,11 +116,12 @@ const PagesScreen = ({ pages }: ScreenProps) => {
         </Box>
         <Box height="70vh">
           <DataGrid
-            rows={pages}
+            rows={data || []}
             columns={columns}
             pageSize={10}
             rowsPerPageOptions={[10]}
             checkboxSelection
+            loading={!data}
             components={{
               Toolbar: GridToolbar,
               NoRowsOverlay: CustomNoRowsOverlay,

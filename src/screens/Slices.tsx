@@ -11,12 +11,15 @@ import {
   GridRenderCellParams,
   GridToolbar,
 } from "@mui/x-data-grid";
+import { serverEndPoint } from "../utils/server";
+import fetcher from "../utils/fetch";
+import useSWRImmutable from "swr/immutable";
 
-type ScreenProps = {
-  slices: Slices;
-};
+const slicesEndPoint = `${serverEndPoint}/api/slices?lang=${getCurrentLocale()}`;
 
-const SlicesScreen = ({ slices }: ScreenProps) => {
+const SlicesScreen = () => {
+  const { data } = useSWRImmutable<Slices>(slicesEndPoint, fetcher);
+
   const router = useRouter();
 
   const handleClick = (sliceName: string) => {
@@ -43,9 +46,10 @@ const SlicesScreen = ({ slices }: ScreenProps) => {
       <Header title="All Prismic slices" />
       <Box p={8} height="85vh" pt={6}>
         <DataGrid
-          rows={slices}
+          rows={data || []}
           columns={columns}
           pageSize={10}
+          loading={!data}
           rowsPerPageOptions={[10]}
           components={{ Toolbar: GridToolbar }}
         />

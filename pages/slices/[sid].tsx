@@ -1,34 +1,9 @@
 import { Box } from "@mui/material";
-import type { GetServerSideProps, NextPage } from "next";
+import type { NextPage } from "next";
 import Head from "next/head";
 import PagesScreen from "../../src/screens/Pages";
-import { serverEndPoint } from "../../src/utils/server";
 
-type Page = {
-  url: string;
-  title: any;
-  occurrences: number;
-};
-
-type PageProps = {
-  pages: Page[];
-};
-
-export const getServerSideProps: GetServerSideProps = async ({
-  req,
-  params,
-}) => {
-  const sliceId = params?.sid as string;
-  const currentLocale = req.cookies.locale;
-
-  const pages = await fetch(
-    `${serverEndPoint}/api/slices/${sliceId}?lang=${currentLocale}`
-  ).then((response) => response.json());
-
-  return { props: { pages } };
-};
-
-const Home: NextPage<PageProps> = ({ pages }) => {
+const Home: NextPage = () => {
   return (
     <Box>
       <Head>
@@ -41,7 +16,7 @@ const Home: NextPage<PageProps> = ({ pages }) => {
       </Head>
 
       <main>
-        <PagesScreen pages={pages} />
+        <PagesScreen />
       </main>
     </Box>
   );

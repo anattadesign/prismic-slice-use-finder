@@ -1,25 +1,9 @@
 import { Box } from "@mui/material";
-import type { GetServerSideProps, NextPage } from "next";
+import type { NextPage } from "next";
 import Head from "next/head";
 import SlicesScreen from "../src/screens/Slices";
-import { Slices } from "../src/types";
-import { serverEndPoint } from "../src/utils/server";
 
-type PageProps = {
-  data: Slices;
-};
-
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const currentLocale = req.cookies.locale;
-
-  const response = await fetch(
-    `${serverEndPoint}/api/slices?lang=${currentLocale}`
-  ).then((response) => response.json());
-
-  return { props: { data: response } };
-};
-
-const Home: NextPage<PageProps> = ({ data }) => {
+const Home: NextPage = () => {
   return (
     <Box>
       <Head>
@@ -29,7 +13,7 @@ const Home: NextPage<PageProps> = ({ data }) => {
       </Head>
 
       <main>
-        <SlicesScreen slices={data} />
+        <SlicesScreen />
       </main>
     </Box>
   );
