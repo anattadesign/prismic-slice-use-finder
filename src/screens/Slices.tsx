@@ -15,9 +15,8 @@ import { serverEndPoint } from "../utils/server";
 import fetcher from "../utils/fetch";
 import useSWRImmutable from "swr/immutable";
 
-const slicesEndPoint = `${serverEndPoint}/api/slices?lang=${getCurrentLocale()}`;
-
 const SlicesScreen = () => {
+  const slicesEndPoint = `${serverEndPoint}/api/slices?lang=${getCurrentLocale()}`;
   const { data } = useSWRImmutable<Slices>(slicesEndPoint, fetcher);
 
   const router = useRouter();
