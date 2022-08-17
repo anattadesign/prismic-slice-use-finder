@@ -9,3 +9,6 @@ export const getCurrentLocale = () => {
 
   return FALLBACK_LOCALE;
 };
+
+export const setCurrentLocale = (locale: string) =>
+  Cookies.set("locale", locale, { expires: 1 });

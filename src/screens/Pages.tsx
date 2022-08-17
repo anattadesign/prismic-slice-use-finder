@@ -14,14 +14,9 @@ import { serverEndPoint } from "../utils/server";
 import { getCurrentLocale } from "../utils/currentLocale";
 import fetcher from "../utils/fetch";
 import useSWRImmutable from "swr/immutable";
+import { SlicePage } from "../types";
 
-type Page = {
-  url: string;
-  title: any;
-  occurrences: number;
-};
-
-const getName = (page: Page) => {
+const getPageName = (page: SlicePage) => {
   try {
     const [content] = page.title;
     return content.text;
@@ -30,30 +25,45 @@ const getName = (page: Page) => {
   }
 };
 
+const CustomNoRowsOverlay = () => (
+  <Typography
+    component={"div"}
+    variant="h6"
+    display={"block"}
+    align={"center"}
+    pt={8}
+  >
+    This slice has not been added to any page yet!
+  </Typography>
+);
+
 const PagesScreen = () => {
   const router = useRouter();
   const { sid: sliceId } = router.query;
   const pagesEndPoint = `${serverEndPoint}/api/slices/${sliceId}?lang=${getCurrentLocale()}`;
 
-  const { data } = useSWRImmutable<Page[]>(pagesEndPoint, fetcher);
-
-  const CustomNoRowsOverlay = () => (
-    <Typography
-      component={"div"}
-      variant="h6"
-      display={"block"}
-      align={"center"}
-      pt={8}
-    >
-      This slice has not been added to any page yet!
-    </Typography>
-  );
+  const { data } = useSWRImmutable<SlicePage[]>(pagesEndPoint, fetcher);
 
   const getSliceName = () => {
     if (sliceId && typeof sliceId === "string") {
       return sliceId.replaceAll("_", " ");
     }
   };
+
+  const getTitle = () => (
+    <>
+      All Prismic pages which has{" "}
+      <Box
+        sx={{
+          display: "inline-block",
+          textTransform: "uppercase",
+        }}
+      >
+        {getSliceName()}
+      </Box>{" "}
+      slice.
+    </>
+  );
 
   const columns: GridColDef[] = [
     {
@@ -64,7 +74,7 @@ const PagesScreen = () => {
         return (
           <Button>
             <a href={row.url} target={"_blank"} rel="noreferrer">
-              {getName(row)}
+              {getPageName(row)}
             </a>
           </Button>
         );
@@ -76,36 +86,12 @@ const PagesScreen = () => {
       headerName: "Occurrences",
       align: "center",
       headerAlign: "center",
-      renderCell: ({ row }: GridRenderCellParams) => {
-        if (row.occurrences) return row.occurrences;
-
-        return 1;
-      },
     },
   ];
 
-  const getHeader = () => {
-    const headerTitle = (
-      <>
-        All Prismic pages which has{" "}
-        <Box
-          sx={{
-            display: "inline-block",
-            textTransform: "uppercase",
-          }}
-        >
-          {getSliceName()}
-        </Box>{" "}
-        slice.
-      </>
-    );
-
-    return <Header title={headerTitle} />;
-  };
-
   return (
     <>
-      {getHeader()}
+      <Header title={getTitle()} />
       <Box p={8} pt={2}>
         <Box textAlign={"right"} mb={2}>
           <Link href={"/"}>Home</Link>

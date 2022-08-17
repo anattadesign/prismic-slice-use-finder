@@ -5,7 +5,6 @@ import {
   Card,
   CardContent,
   CardMedia,
-  CircularProgress,
   Typography,
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
@@ -15,13 +14,9 @@ import Locales from "../components/Locale";
 import { getCurrentLocale } from "../utils/currentLocale";
 
 const HomeScreen = () => {
-  const [isLoading, onLoading] = React.useState(false);
-
   const router = useRouter();
 
   const handleClick = () => {
-    onLoading(true);
-
     router.push(`/slices?lang=${getCurrentLocale()}`);
   };
 
@@ -61,11 +56,6 @@ const HomeScreen = () => {
                 <Button
                   variant="contained"
                   onClick={handleClick}
-                  startIcon={
-                    isLoading && (
-                      <CircularProgress size={20} sx={{ color: "white" }} />
-                    )
-                  }
                   sx={{ ml: 4 }}
                   size="large"
                 >

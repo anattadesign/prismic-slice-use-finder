@@ -7,28 +7,24 @@ import {
 } from "@mui/material";
 import * as React from "react";
 import { Locales } from "../types";
-import Cookies from "js-cookie";
 import { serverEndPoint } from "../utils/server";
 import fetcher from "../utils/fetch";
 import useSWRImmutable from "swr/immutable";
+import { getCurrentLocale, setCurrentLocale } from "../utils/currentLocale";
 
-const defaultLocale = {
+const DEFAULT_LOCALE = {
   id: "en-us",
   name: "English - United States",
 };
 
-const setLocaleCookie = (locale: string) =>
-  Cookies.set("locale", locale, { expires: 1 });
-
-const getLocaleCookie = () => Cookies.get("locale");
 const localeEndPoint = `${serverEndPoint}/api/locale`;
 
 const Locales = () => {
-  const [selected, onSelect] = React.useState<string>(defaultLocale.id);
+  const [selected, onSelect] = React.useState<string>(DEFAULT_LOCALE.id);
   const { data } = useSWRImmutable<Locales>(localeEndPoint, fetcher);
 
   const lookupForLocaleCookie = () => {
-    const existingLocale = getLocaleCookie();
+    const existingLocale = getCurrentLocale();
 
     if (existingLocale) {
       onSelect(existingLocale);
@@ -36,8 +32,7 @@ const Locales = () => {
       return;
     }
 
-    setLocaleCookie(defaultLocale.id);
-    onSelect(defaultLocale.id);
+    setCurrentLocale(DEFAULT_LOCALE.id);
   };
 
   React.useEffect(() => {
@@ -47,10 +42,11 @@ const Locales = () => {
     lookupForLocaleCookie();
   }, []);
 
-  const handleChange = (event: SelectChangeEvent) => {
-    const changedLocale = event.target.value;
+  const handleChange = ({
+    target: { value: changedLocale },
+  }: SelectChangeEvent) => {
     onSelect(changedLocale);
-    setLocaleCookie(changedLocale);
+    setCurrentLocale(changedLocale);
   };
 
   return (

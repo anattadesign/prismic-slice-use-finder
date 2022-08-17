@@ -1,6 +1,6 @@
 import { NextApiResponse, NextApiRequest } from "next";
 import { Slices, RequestSlice } from "../../src/types";
-import { client } from "../../src/utils/client";
+import { client } from "../../src/utils/prismic-client";
 
 export default async function handler(
   req: NextApiRequest,
