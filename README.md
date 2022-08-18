@@ -1,16 +1,13 @@
-# Motivation behind this Project
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Welcome to Primsic Slice Use Finder
 
 ## Getting Started
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-```
+1. Clone this repo.
+2. Run `yarn` to install all dependencies.
+3. Create `.env.local` from `.env.local.sample`
+4. Add `<REPO_NAME>` and `<ACCESS_TOKEN>` taken from your Prismic admin
+5. Update remaining project settings in .env.local
+6. Deploy project to [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

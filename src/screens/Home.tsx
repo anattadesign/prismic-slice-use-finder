@@ -12,6 +12,8 @@ import { useRouter } from "next/router";
 import Header from "../components/Header";
 import Locales from "../components/Locale";
 import { getCurrentLocale } from "../utils/currentLocale";
+const title = `${process.env.NEXT_PUBLIC_PROJECT_NAME} Prismic Slices Dashboard`
+const homeImage = process.env.NEXT_PUBLIC_PROJECT_HOME_IMAGE;
 
 const HomeScreen = () => {
   const router = useRouter();
@@ -22,7 +24,7 @@ const HomeScreen = () => {
 
   return (
     <Box bgcolor={grey["A100"]} minHeight="100vh">
-      <Header title="Four-Sigmatic Prismic Slices Dashboard" />
+      <Header title={title} />
       <Box maxWidth={750} margin="auto" mt={16}>
         <Card
           sx={{
@@ -67,8 +69,7 @@ const HomeScreen = () => {
           <CardMedia
             component="img"
             sx={{ width: 200 }}
-            image="/coffee-thumbnail.jpg"
-            alt="Coffee"
+            image={homeImage}
           />
         </Card>
       </Box>
