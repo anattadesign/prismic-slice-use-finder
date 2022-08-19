@@ -2,7 +2,7 @@ import * as React from "react";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 import Image from "next/image";
-const logoImage = process.env.NEXT_PUBLIC_PROJECT_LOGO_IMAGE;
+const logoImage = process.env.NEXT_PUBLIC_PROJECT_LOGO_IMAGE || ''
 
 type HeaderProps = {
   title: string | React.ReactNode;

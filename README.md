@@ -6,8 +6,9 @@
 2. Run `yarn` to install all dependencies.
 3. Create `.env.local` from `.env.local.sample`
 4. Add `<REPO_NAME>` and `<ACCESS_TOKEN>` taken from your Prismic admin
-5. Update remaining project settings in .env.local
+5. Update remaining project environment variables in .env.local and Vercel env variables
 6. Deploy project to [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
+6. Add `<NEXT_PUBLIC_VERCEL_SERVER_ENDPOINT>` env variable for app domain (deployed app)
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
